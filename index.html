@@ -76,7 +76,7 @@
       margin: 20px auto;
       font-size: 100px;
       text-align: center;
-      line-height: 100px;
+      line-height: 10px;
       background-color: #555;
       color: white;
       border: none;
@@ -179,20 +179,20 @@
   </div>
 
   <div class="gauge-container">
-    <div class="gauge-bar-red" id="gaugeBarRed">ㅤㅤㅤBPM</div>
-    <div class="gauge-info" id="redGaugeValue">80</div>
+    <div class="gauge-bar-red" id="gaugeBarRed"></div>
+    <div class="gauge-info" id="redGaugeValue">BPM 80</div>
     <div class="gauge-text" id="redGaugeText">빨간색 게이지</div>
   </div>
 
   <div class="gauge-container">
-    <div class="gauge-bar-green" id="gaugeBarGreen">ㅤㅤㅤSleep</div>
-    <div class="gauge-info" id="greenGaugeValue">40</div>
+    <div class="gauge-bar-green" id="gaugeBarGreen"></div>
+    <div class="gauge-info" id="greenGaugeValue">Sleep 40</div>
     <div class="gauge-text" id="greenGaugeText">초록색 게이지</div>
   </div>
 
-  <div class="game-over" id="gameOver">Game Over! The coffee man fell asleep. 😪💤 </div>
-  <div class="heart-disease" id="heartDisease">Game Over! Coffee Man has heart disease! 😵 💔</div>
   <button class="restart-button" id="restartButton" onclick="restartGame()" style="display:none;">try again ❤️‍🩹</button>
+    <div class="game-over" id="gameOver">Game Over! The coffee man fell asleep. 😪💤 </div>
+  <div class="heart-disease" id="heartDisease">Game Over! Coffee Man has heart disease! 😵 💔</div>
 
   <button class="start-button" id="startButton" onclick="start()">Start</button>
   <button class="button" id="clickButton" onclick="adjustGauges()" disabled>☕️</button>
@@ -314,8 +314,8 @@
       document.getElementById("stopwatch").textContent = "0.00";
       document.getElementById("gaugeBarRed").style.width = "40%";
       document.getElementById("gaugeBarGreen").style.width = "40%";
-      document.getElementById("redGaugeValue").textContent = "80";
-      document.getElementById("greenGaugeValue").textContent = "40";
+      document.getElementById("redGaugeValue").textContent = "BPM 80";
+      document.getElementById("greenGaugeValue").textContent = "Sleep 100";
       document.getElementById("gameOver").style.display = "none";
       document.getElementById("heartDisease").style.display = "none";
       document.getElementById("restartButton").style.display = "none";
