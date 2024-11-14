@@ -70,24 +70,28 @@
       white-space: nowrap;
     }
 
-    /* 동그란 버튼 스타일 */
-    .button {
-      display: block;
-      width: 0px;
-      height: 0px;
-      margin: 40px auto;
-      font-size: 100px;
-      text-align: center;
-      line-height: 150px;
-      background-color: #555;
-      color: white;
-      border: none;
-      border-radius: 90px;
-    }
+/* 이모티콘 버튼 스타일 */
+.emoji-button {
+  background-color: transparent;
+  border: none;
+  font-size: 140px;
+  cursor: pointer;
+  text-align: center;
+  display: block;
+  margin: 20px auto;
+  color: #555;
+  outline: none;
+}
 
-    .button:hover {
-      background-color: #333;
-    }
+.emoji-button:disabled {
+  color: #ddd;
+  cursor: not-allowed;
+}
+
+.emoji-button:hover {
+  color: #333;
+}
+
 
     /* 시작 버튼 스타일 */
     .start-button {
@@ -195,7 +199,7 @@
   <div class="heart-disease" id="heartDisease">Game Over! Coffee Man has heart disease! 😵 💔</div>
 
   <button class="start-button" id="startButton" onclick="start()">Start</button>
-  <button class="button" id="clickButton" onclick="adjustGauges()" disabled>☕️</button>
+  <button class="emoji-button" id="clickButton" onclick="adjustGauges()" disabled>☕️</button>
 
   <script>
     let redGaugeValue = 80;
@@ -302,28 +306,29 @@
       document.getElementById("startButton").disabled = true;
     }
 
-    function restartGame() {
-      redGaugeValue = 80;
-      greenGaugeValue = 40;
-      stopwatchTime = 0;
-      isStarted = false;
-      gameOver = false;
-      heartDisease = false;
-      currentGifRange = 0;
+  function restartGame() {
+  redGaugeValue = 80;
+  greenGaugeValue = 40;
+  stopwatchTime = 0;
+  isStarted = false;
+  gameOver = false;
+  heartDisease = false;
+  currentGifRange = 0;
 
-      document.getElementById("stopwatch").textContent = "0.00";
-      document.getElementById("gaugeBarRed").style.width = "40%";
-      document.getElementById("gaugeBarGreen").style.width = "40%";
-      document.getElementById("redGaugeValue").textContent = "BPM 🫀 80";
-      document.getElementById("greenGaugeValue").textContent = "Sleep 😴 100";
-      document.getElementById("gameOver").style.display = "none";
-      document.getElementById("heartDisease").style.display = "none";
-      document.getElementById("restartButton").style.display = "none";
-      document.getElementById("clickButton").disabled = false;
-      document.getElementById("startButton").disabled = false;
+  document.getElementById("stopwatch").textContent = "0.00";
+  document.getElementById("gaugeBarRed").style.width = "40%";
+  document.getElementById("gaugeBarGreen").style.width = "40%";
+  document.getElementById("redGaugeValue").textContent = "BPM 🫀 80";
+  document.getElementById("greenGaugeValue").textContent = "Sleep 😴 100";
+  document.getElementById("gameOver").style.display = "none";
+  document.getElementById("heartDisease").style.display = "none";
+  document.getElementById("restartButton").style.display = "none";
+  document.getElementById("clickButton").disabled = true;  // 이모티콘 버튼 비활성화
+  document.getElementById("startButton").disabled = false;
 
-      document.getElementById("gifImage").src = "gif1.gif";
-    }
+  document.getElementById("gifImage").src = "gif1.gif";
+}
+
 
     function createFloatingEmoji() {
       const emoji = document.createElement("div");
