@@ -76,7 +76,7 @@
       margin: 20px auto;
       font-size: 100px;
       text-align: center;
-      line-height: 60px;
+      line-height: 100px;
       background-color: #555;
       color: white;
       border: none;
@@ -112,7 +112,7 @@
     /* 다시하기 버튼 스타일 */
     .restart-button {
       display: block;
-      width: 120px;
+      width: 150px;
       height: 40px;
       margin: 20px auto;
       font-size: 16px;
@@ -190,12 +190,12 @@
     <div class="gauge-text" id="greenGaugeText">초록색 게이지</div>
   </div>
 
-  <button class="start-button" id="startButton" onclick="start()">Start</button>
-  <button class="button" id="clickButton" onclick="adjustGauges()" disabled>☕️</button>
-
   <div class="game-over" id="gameOver">Game Over! The coffee man fell asleep. 😪💤 </div>
   <div class="heart-disease" id="heartDisease">Game Over! Coffee Man has heart disease! 😵 💔</div>
   <button class="restart-button" id="restartButton" onclick="restartGame()" style="display:none;">try again ❤️‍🩹</button>
+
+  <button class="start-button" id="startButton" onclick="start()">Start</button>
+  <button class="button" id="clickButton" onclick="adjustGauges()" disabled>☕️</button>
 
   <script>
     let redGaugeValue = 80;
