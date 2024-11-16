@@ -172,32 +172,6 @@
         opacity: 0; /* 점점 투명해짐 */
       }
     }
-/* test */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f4f4f9;
-            color: #333;
-        }
-        h1 {
-            text-align: center;
-        }
-        ul {
-            list-style: none;
-            padding: 0;
-        }
-        li {
-            background: #fff;
-            margin: 10px 0;
-            padding: 15px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        strong {
-            color: #007BFF;
-        }
   </style>
 </head>
 <body>
@@ -227,20 +201,56 @@
   <button class="start-button" id="startButton" onclick="start()">Start</button>
   <button class="emoji-button" id="clickButton" onclick="adjustGauges()" disabled>☕️</button>
 
-      <h1>Top Ranked Content</h1>
-    <ul id="ranking-list">
-        <!-- 랭킹 데이터가 여기에 표시됩니다 -->
-    </ul>
+ <h2>Add New Content</h2>
+    <form id="content-form">
+        <input type="text" id="content-title" placeholder="Enter content title" required>
+        <button type="submit">Add Content</button>
+    </form>
+    <div id="result"></div>
 
+    <h2>Top Ranked Content</h2>
+    <div class="ranking-list">
+        <ul id="ranking-list">
+            <!-- Ranking data will be loaded here -->
+        </ul>
+    </div>
+
+
+  
     <script>
-        // Neo4j 데이터를 가져오는 함수
+        const API_URL = 'http://coffeeman.r-o.kr/'; // Replace with your server URL if different
+
+        // Add new content
+        document.getElementById('content-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const title = document.getElementById('content-title').value;
+
+            try {
+                const response = await fetch(`${API_URL}/api/content`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ title }),
+                });
+
+                const result = await response.json();
+                document.getElementById('result').innerText = result.message;
+                document.getElementById('content-title').value = ''; // Clear input
+                fetchRankings(); // Refresh ranking list
+            } catch (error) {
+                console.error('Error adding content:', error);
+                document.getElementById('result').innerText = 'Error adding content';
+            }
+        });
+
+        // Fetch rankings
         async function fetchRankings() {
             try {
-                // API 호출
-                const response = await fetch('http://localhost:5000/api/ranking');
+                const response = await fetch(`${API_URL}/api/ranking`);
                 const rankings = await response.json();
 
-                // HTML 요소에 데이터 추가
                 const rankingList = document.getElementById('ranking-list');
                 rankingList.innerHTML = rankings.map((item, index) => `
                     <li>
@@ -249,12 +259,17 @@
                 `).join('');
             } catch (error) {
                 console.error('Error fetching rankings:', error);
+                document.getElementById('ranking-list').innerHTML = '<li>Error loading rankings</li>';
             }
         }
 
-        // 페이지 로드 시 데이터 가져오기
+        // Load rankings on page load
         document.addEventListener('DOMContentLoaded', fetchRankings);
     </script>
+
+
+  
+  
 
 <ins class="kakao_ad_area" style="display:none;"
 data-ad-unit = "DAN-cKFRpXzEALMWsQpQ"
