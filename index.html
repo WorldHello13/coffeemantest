@@ -172,6 +172,32 @@
         opacity: 0; /* 점점 투명해짐 */
       }
     }
+/* test */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            background: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        strong {
+            color: #007BFF;
+        }
   </style>
 </head>
 <body>
@@ -200,6 +226,35 @@
 
   <button class="start-button" id="startButton" onclick="start()">Start</button>
   <button class="emoji-button" id="clickButton" onclick="adjustGauges()" disabled>☕️</button>
+
+      <h1>Top Ranked Content</h1>
+    <ul id="ranking-list">
+        <!-- 랭킹 데이터가 여기에 표시됩니다 -->
+    </ul>
+
+    <script>
+        // Neo4j 데이터를 가져오는 함수
+        async function fetchRankings() {
+            try {
+                // API 호출
+                const response = await fetch('http://localhost:5000/api/ranking');
+                const rankings = await response.json();
+
+                // HTML 요소에 데이터 추가
+                const rankingList = document.getElementById('ranking-list');
+                rankingList.innerHTML = rankings.map((item, index) => `
+                    <li>
+                        <strong>${index + 1}. ${item.title}</strong> - ${item.views} views
+                    </li>
+                `).join('');
+            } catch (error) {
+                console.error('Error fetching rankings:', error);
+            }
+        }
+
+        // 페이지 로드 시 데이터 가져오기
+        document.addEventListener('DOMContentLoaded', fetchRankings);
+    </script>
 
 <ins class="kakao_ad_area" style="display:none;"
 data-ad-unit = "DAN-cKFRpXzEALMWsQpQ"
